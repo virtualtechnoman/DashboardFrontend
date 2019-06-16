@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent},
   { path: 'region', component: RegionComponent},
   { path: 'therapy', component: TherapyComponent},
-  { path: 'user', component: UserComponent}
+  { path: 'users', component: UserComponent}
 ];
 
 @NgModule({

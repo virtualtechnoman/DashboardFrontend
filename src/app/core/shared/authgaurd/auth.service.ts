@@ -8,7 +8,8 @@ export class AuthService {
   private loggedInStatus = false;
   public user = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+   }
 
   get isloggedIn() {
     console.log(this.loggedInStatus)
@@ -46,7 +47,6 @@ export class AuthService {
       this.user = data["payload"].name;
       this.router.navigate(['user']);
       this.loggedInStatus = true;
-
     })
   }
 }
