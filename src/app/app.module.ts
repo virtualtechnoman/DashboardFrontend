@@ -14,6 +14,12 @@ import { UserComponent } from './core/modules/user/user.component';
 import { ProductsModule } from './products/products.module';
 import { CityComponent } from './core/modules/city/city.component';
 import { BuComponent } from './core/modules/bu/bu.component';
+import { CompanyComponent } from './core/modules/company/company.component';
+import { CountryComponent } from './core/modules/country/country.component';
+import { DistrictComponent } from './core/modules/district/district.component';
+import { RegionComponent } from './core/modules/region/region.component';
+import { TherapyComponent } from './core/modules/therapy/therapy.component';
+import { CustomerComponent } from './core/modules/customer/customer.component';
 
 
 @NgModule({
@@ -24,6 +30,12 @@ import { BuComponent } from './core/modules/bu/bu.component';
     UserComponent,
     CityComponent,
     BuComponent,
+    CompanyComponent,
+    CountryComponent,
+    DistrictComponent,
+    RegionComponent,
+    TherapyComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule,
