@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   loginUser(email: String, password: String) {
-
     return this.http.post('http://localhost:5000/api/users/login', { email, password }).subscribe(data => {
       console.log(data)
       if (data["success"]) {
@@ -35,13 +34,13 @@ export class AuthService {
       }
     })
   }
+
   logout() {
     localStorage.removeItem('access_token');
     this.router.navigate(['']);
   }
 
   loginUsers(email: String, password: String) {
-
     return this.http.post('http://localhost:5000/api/users/login/user', { email, password }).subscribe(data => {
       console.log(data)
       this.user = data["payload"].name;
