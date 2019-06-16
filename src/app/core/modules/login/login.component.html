@@ -1,0 +1,21 @@
+<h1>Admin login</h1>
+
+<form (submit)="loginUser($event)">
+  <input type="email" placeholder="email" id="email">
+  <input type="text" placeholder="password" id="password">
+  <input type="submit" value="submit">
+</form>
+
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+<h3>User login</h3>
+<div>
+  <input type="email" placeholder="email" name="email" [(ngModel)]="email">
+  <input type="text" placeholder="password" name="password" [(ngModel)]="password">
+
+  <button (click)="loginUsers()">submit</button>
+</div>

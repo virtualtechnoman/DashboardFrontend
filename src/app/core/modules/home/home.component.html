@@ -1,0 +1,77 @@
+<button (click)="logout()">logout</button>
+<table border="1px">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>password</th>
+    <th>Operation</th>
+  </tr>
+  <div *ngFor="let user of Users;let i=index">
+    <tr>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.password}}</td>
+      <td><button (click)="editUser(i)">edit</button><button (click)="deleteUser(i)">delete</button></td>
+    </tr>
+  </div>
+</table>
+<br><br><br>
+<br>
+<hr>
+<br>
+
+<h1>Add User</h1>
+<form (submit)="AddUser($event)">
+  <input type="text" placeholder="name" id="name">
+  <input type="email" placeholder="email" id="email">
+  <input type="text" placeholder="password" id="password">
+  <input type="submit" value="submit">
+</form>
+<br>
+<hr>
+<br>
+<h1>Edit User</h1>
+
+<form (submit)="updateUser($event)">
+  <input type="text" placeholder="name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+  <input type="email" placeholder="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+  <input type="text" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+  <input type="submit" value="submit">
+</form>
+
+
+<table border="1px">
+  <tr>
+    <th>pName</th>
+    <th>price</th>
+    <th>Operation</th>
+  </tr>
+  <div *ngFor="let product of Products;let i=index">
+    <tr>
+      <td>{{product.pname}}</td>
+      <td>{{product.price}}</td>
+      <td><button (click)="editProduct(i)">edit</button><button (click)="deleteProduct(i)">delete</button></td>
+    </tr>
+  </div>
+</table>
+<br><br><br>
+<br>
+<hr>
+<br>
+
+<h1>Add Product</h1>
+<form (submit)="AddProduct($event)">
+  <input type="text" placeholder="Productname" id="pname">
+  <input type="number" placeholder="price" id="price">
+  <input type="submit" value="submit">
+</form>
+<br>
+<hr>
+<br>
+<h1>Edit Product</h1>
+
+<form (submit)="updateProduct($event)">
+  <input type="text" placeholder="name" [(ngModel)]="pname" [ngModelOptions]="{standalone: true}">
+  <input type="number" placeholder="price" [(ngModel)]="price" [ngModelOptions]="{standalone: true}">
+  <input type="submit" value="submit">
+</form>
