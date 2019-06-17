@@ -20,6 +20,7 @@ import { DistrictComponent } from './core/modules/district/district.component';
 import { RegionComponent } from './core/modules/region/region.component';
 import { TherapyComponent } from './core/modules/therapy/therapy.component';
 import { CustomerComponent } from './core/modules/customer/customer.component';
+import { UserRoleComponent } from './core/modules/user-role/user-role.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CustomerComponent } from './core/modules/customer/customer.component';
     RegionComponent,
     TherapyComponent,
     CustomerComponent,
+    UserRoleComponent
   ],
   imports: [
     BrowserModule,

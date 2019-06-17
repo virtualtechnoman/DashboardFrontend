@@ -18,7 +18,8 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
         <h5 class="card-header">
-          <button class="float-right btn btn-success" data-toggle="modal" data-target="#exampleModal"> +Add New</button>
+          <button class="float-right btn btn-success" data-toggle="modal" data-target="#exampleModal"> +Add New
+            User</button>
         </h5>
         <div class="card-body">
           <div class="table-responsive">
@@ -35,7 +36,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let user of Users; let i= index">
-                  <td>{{i}}</td>
+                  <td>{{i+1}}</td>
                   <td>{{user.first_name}} {{user.last_name}}</td>
                   <td>{{user.company_name}}</td>
                   <td>{{user.user_role}}</td>
@@ -52,8 +53,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -129,8 +128,8 @@
                 <label for="inputname3" class="col-sm-4 col-form-label">User Role</label>
                 <div class="col-sm-8">
                   <select [(ngModel)]="selectedUserRole" name="selectedBU" id="user_role" class="form-control">
-                    <option *ngFor="let bu of allUserRoles" [value]="bu" selected>
-                      {{bu}}</option>
+                    <option *ngFor="let bu of allUserRoles" [value]="bu.user_role" selected>
+                      {{bu.user_role}}</option>
                   </select> </div>
               </div>
             </div>
@@ -145,7 +144,7 @@
               </div>
             </div>
           </div>
-          <div class="form-row align-items-center">
+          <div class="form-row align-items-center my-2">
             <div class="col">
               <div class="row">
                 <label for="inputname3" class="col-sm-5 col-form-label">Manager Name</label>
@@ -197,6 +196,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <!-- <button (click)="logout()">logout</button>
 

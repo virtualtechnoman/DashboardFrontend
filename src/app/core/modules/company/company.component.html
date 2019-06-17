@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let company of companies; let i = index">
-                  <td>{{i}}</td>
+                  <td>{{i+1}}</td>
                   <td>{{company.company_name}}</td>
                   <td *ngIf="company.is_active">Active</td>
                   <td *ngIf="!company.is_active">Not Active</td>
