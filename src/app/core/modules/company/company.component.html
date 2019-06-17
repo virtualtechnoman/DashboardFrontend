@@ -24,7 +24,7 @@
           <div class="table-responsive">
             <table class="table table-striped table-bordered first">
               <thead>
-                <tr >
+                <tr>
                   <th>S.No</th>
                   <th>Companyname</th>
                   <th>Status</th>
@@ -37,7 +37,8 @@
                   <td>{{company.company_name}}</td>
                   <td *ngIf="company.is_active">Active</td>
                   <td *ngIf="!company.is_active">Not Active</td>
-                  <td><button class="btn btn-sm btn-primary" >E</button>
+                  <td><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal"
+                      (click)="editcompany(i)">E</button>
                     <button class="btn btn-sm btn-danger" (click)="deleteCompany(i)">X</button>
                   </td>
                 </tr>
@@ -50,6 +51,41 @@
   </div>
 </div>
 
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Edit Company</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+
+      <form (submit)="updatecompany()">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="inputname3" class="col-sm-4 col-form-label font-weight-bold">Comany name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" placeholder="Enter Company Name Here" [(ngModel)]="companyname"
+                name="companyname">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Status</label>
+            <div class="col-sm-8">
+              <input type="checkbox" class="form-control" [(ngModel)]="isActive" placeholder="isActive" name="isActive">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -66,7 +102,8 @@
           <div class="form-group row">
             <label for="inputname3" class="col-sm-4 col-form-label font-weight-bold">Comany name</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Enter Company Name Here" id="companyname" name="companyname">
+              <input type="text" class="form-control" placeholder="Enter Company Name Here" id="companyname"
+                name="companyname">
             </div>
           </div>
           <div class="form-group row">

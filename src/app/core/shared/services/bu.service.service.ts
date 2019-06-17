@@ -21,6 +21,8 @@ export class Bu {
   deletebu(id) {
     return this.http.delete(this.base + `delete/${id}`)
   }
-
+  updatebu(bu_id, bu_name, id) {
+    return this.http.put(this.base + `update/${id}`, { bu_id, bu_name })
+  }
 
 }

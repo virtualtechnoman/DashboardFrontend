@@ -9,39 +9,38 @@ import { Region } from '../../shared/services/region.service.service';
   styleUrls: ['./city.component.css']
 })
 export class CityComponent implements OnInit {
-  private cityname = '';
-  private countryname = '';
-  private regionname = '';
-  private companyname = '';
+  private selectedcity = '';
+  private selectedcountry = '';
+  private selectedregion = '';
+  private selectedcompany = '';
   private isactive = false;
+  public index = 0;
   public allCities: any = [];
   public allCountries: any = [];
   public allCompanies: any = [];
   public allRegions: any = [];
 
-  selectedCompany;
-  selectedCountry;
-  selectedRegion;
 
-  constructor(private city: City, private countryService:CountryService, private companyService:CompanyService,
-    private regionService:Region) {
-      this.countryService.getallcountry().subscribe(res=>this.allCountries = res);
-      this.companyService.getallcompany().subscribe(res=>this.allCompanies = res);
-      this.regionService.getallRegion().subscribe(res=>this.allRegions = res);
-     }
+  constructor(private city: City, private countryService: CountryService, private companyService: CompanyService,
+
+    private regionService: Region) {
+    this.countryService.getallcountry().subscribe(res => this.allCountries = res);
+    this.companyService.getallcompany().subscribe(res => this.allCompanies = res);
+    this.regionService.getallRegion().subscribe(res => this.allRegions = res);
+  }
 
   ngOnInit() {
-    this.city.getallcity().subscribe(data => { console.log(data); this.allCities = data })
+    this.city.getallcity().subscribe(data => { this.allCities = data })
   }
 
   addcity(event) {
     let target = event.target;
-    const company_name = this.selectedCompany;
-    const country_name = this.selectedCountry;
-    const region_name = this.selectedRegion;
+    const company_name = target.querySelector('#selectedCompany').value;
+    const country_name = target.querySelector('#selectedCountry').value;
+    const region_name = target.querySelector('#selectedRegion').value;
     const city_name = target.querySelector('#city_name').value;
     const isactive = true;
-    console.log(company_name, country_name, region_name, city_name, isactive)
+
     this.city.addcity(company_name, country_name, region_name, city_name, isactive)
       .subscribe(data => this.allCities.push(data))
   }
@@ -49,4 +48,35 @@ export class CityComponent implements OnInit {
   deletecity(index) {
     this.city.deletecity(this.allCities[index]._id).subscribe(() => this.allCities.splice(index, 1))
   }
+
+
+
+  editcity(i) {
+    this.selectedcity = this.allCities[i].city_name
+    this.selectedcountry = this.allCities[i].company_name
+    this.selectedregion = this.allCities[i].region_name
+    this.selectedcompany = this.allCities[i].company_name;
+    this.index = i;
+
+  }
+
+  reset() {
+    this.selectedcity = '';
+    this.selectedcountry = '';
+    this.selectedregion = '';
+    this.selectedcompany = '';
+    this.isactive = false;
+  }
+
+  updatecity() {
+    this.city.updatecity(this.selectedcompany, this.selectedcountry, this.selectedregion, this.selectedcity, this.isactive, this.allCities[this.index]._id)
+      .subscribe(data => {
+        this.reset();
+        alert("recors updated");
+        this.allCities.splice(this.index, 1, data);
+      })
+
+  }
+
+
 }

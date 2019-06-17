@@ -31,13 +31,23 @@ export class BuComponent implements OnInit {
   }
 
   editbu(i) {
-    this.buid = this.items[i].buid;
-    this.buname = this.items[i].bname;
-    // $("#edit").modal('show');
+    this.buid = this.items[i].bu_id;
+    this.buname = this.items[i].bu_name;
+    this.index = i;
+  }
+
+  reset() {
+    this.buid = "";
+    this.buname = "";
   }
 
   updatebu() {
+    this.bu.updatebu(this.buid, this.buname, this.items[this.index]._id)
+      .subscribe(data => {
+        this.reset();
+        alert("recors updated");
+        this.items.splice(this.index, 1, data);
+      })
 
   }
-
 }

@@ -20,4 +20,8 @@ export class City {
   deletecity(id) {
     return this.http.delete(this.base + `delete/${id}`)
   }
+
+  updatecity(company_name, country_name, region_name, city_name, is_active, id) {
+    return this.http.put(this.base + `update/${id}`, { company_name, country_name, region_name, city_name, is_active })
+  }
 }

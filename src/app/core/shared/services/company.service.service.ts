@@ -21,4 +21,9 @@ export class CompanyService {
   deletecompany(id) {
     return this.http.delete(this.base + `delete/${id}`)
   }
+
+
+  updatecompany(company_name, is_active, id) {
+    return this.http.put(this.base + `update/${id}`, { company_name, is_active })
+  }
 }

@@ -6,13 +6,14 @@ import { CompanyService } from '../../shared/services/company.service.service'
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
-  private companyname = '';
+  public companyname = '';
   private isactive = false;
   public items: any = [];
-  companies:any[]=[];
+  private index = 0;
+  companies: any[] = [];
   constructor(private company: CompanyService) {
     this.getAllCompany();
-   }
+  }
 
   ngOnInit() {
   }
@@ -29,7 +30,31 @@ export class CompanyComponent implements OnInit {
     this.company.deletecompany(this.companies[index]._id).subscribe(() => this.companies.splice(index, 1))
   }
 
-  getAllCompany(){
-    this.company.getallcompany().subscribe((res:[])=>this.companies = res)
+  getAllCompany() {
+    this.company.getallcompany().subscribe((res: []) => this.companies = res)
   }
+
+  editcompany(i) {
+    this.companyname = this.companies[i].company_name;
+    this.index = i;
+    console.log(this.companyname)
+
+  }
+
+  reset() {
+    this.companyname = "";
+    this.isactive = false;
+  }
+
+  updatecompany() {
+    this.company.updatecompany(this.companyname, this.isactive, this.companies[this.index]._id)
+      .subscribe(data => {
+        this.reset();
+        alert("record updated");
+        this.companies.splice(this.index, 1, data);
+      })
+
+  }
+
+
 }
