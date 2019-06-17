@@ -28,25 +28,18 @@
                   <th>S.No</th>
                   <th>BU ID</th>
                   <th>BU Name</th>
-                  <th>Status</th>
+                  <th>Operations</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
+                <tr *ngFor="let item of items;let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.bu_id}}</td>
+                  <td>{{item.bu_name}}</td>
+                  <td><button class="btn btn-sm btn btn-primary" (click)="editbu(i)">E</button>
+                    <button class="btn btn-sm btn-danger" (click)="deletebu(i)">X</button></td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>S.No</th>
-                  <th>BU ID</th>
-                  <th>BU Name</th>
-                  <th>Status</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>
@@ -55,25 +48,41 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add BU</h5>
         <a href="#" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
-      <div class="modal-body">
-        <p>Woohoo, You are readng this text in a modal! Use Bootstrap’s JavaScript modal plugin to add dialogs
-          to your site for lightboxes, user notifications, or completely custom content.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
-      </div>
+      <form (submit)="addbu($event)">
+        <div class="modal-body">
+
+          <div class="form-group row">
+            <label for="inputname3" class="col-sm-2 col-form-label font-weight-bold">BU ID</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Enter Bu ID here" [(ngModel)]="buid" id="buid" name="buid">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="inputPrice3" class="col-sm-2 col-form-label font-weight-bold">BU NAME</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" [(ngModel)]="buname" placeholder="Enter BU Name Here" id="buname"
+                name="buname">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+          <input class="btn btn-primary" type="submit" value="submit">
+        </div>
+      </form>
     </div>
   </div>
 </div>

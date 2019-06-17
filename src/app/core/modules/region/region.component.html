@@ -18,7 +18,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
         <h5 class="card-header">
-          <button class="float-right btn btn-success"> +Add New</button>
+          <button class="float-right btn btn-success" data-toggle="modal" data-target="#exampleModal"> +Add New</button>
         </h5>
         <div class="card-body">
           <div class="table-responsive">
@@ -34,21 +34,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
+                <tr *ngFor="let region of allRegions; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{region.region_name}}</td>
+                  <td>{{region.country_name}}</td>
+                  <td>{{region.company_name}}</td>
+                  <td *ngIf="region.is_active">Active</td>
+                  <td *ngIf="!region.is_active">Not Active</td>
+                  <td><button class="btn btn-sm btn-primary" >E</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteRegion(i)">X</button>
+                  </td>
                 </tr>
               </tbody>
-              <tfoot>
-                <th>S.No</th>
-                <th>Region Name</th>
-                <th>Country Name</th>
-                <th>Company Name</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tfoot>
             </table>
           </div>
         </div>
@@ -64,18 +61,48 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Region</h5>
         <a href="#" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
       <div class="modal-body">
-        <p>Woohoo, You are readng this text in a modal! Use Bootstrap’s JavaScript modal plugin to add dialogs
-          to your site for lightboxes, user notifications, or completely custom content.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+        <form (submit)="addRegion($event)">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-4 col-form-label font-weight-bold">Country Name</label>
+              <div class="col-sm-8">
+                <select [(ngModel)]="selectedCountry" name="selectedCompany" class="form-control">
+                  <option *ngFor="let country of allCountries" [value]="country.country_name" selected>
+                    {{country.country_name}}</option>
+                </select> </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-4 col-form-label font-weight-bold">Company Name</label>
+              <div class="col-sm-8">
+                <select [(ngModel)]="selectedCompany" name="allCompanies" class="form-control">
+                  <option *ngFor="let company of allCompanies" [value]="company.company_name" selected>
+                    {{company.company_name}}</option>
+                </select> </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Region Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="Region Name" id="region_name" name="region_name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">isActive</label>
+              <div class="col-sm-8">
+                <input type="checkbox" class="form-control" id="isActive" placeholder="isActive" name="isActive">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <input type="submit" class="btn btn-success" value="submit">
+          </div>
+        </form>
       </div>
     </div>
   </div>

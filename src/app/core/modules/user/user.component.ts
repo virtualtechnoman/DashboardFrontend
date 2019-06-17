@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/authgaurd/auth.service'
 import { DataService } from '../../shared/services/data.service'
+import { Region } from '../../shared/services/region.service.service';
+import { City } from '../../shared/services/city.service.service';
+import { District } from '../../shared/services/district.service.service';
 
 @Component({
   selector: 'app-user',
@@ -10,16 +13,34 @@ import { DataService } from '../../shared/services/data.service'
 export class UserComponent implements OnInit {
   public user = '';
   public Products = [];
+  allRegions: any = [];
+  allCity: any = [];
+  allDistricts: any = [];
+  selectedDistrict;
+  selectedRegion;
+  selectedCity;
+  selectedUserRole;
+  allUserRoles: any[] = ["Admin", "Country Head", "Line Manager", "Region Head", "District Head", "City Head", "BU", "Distirbutor"]
+
+  public Users = [];
+  public name = '';
+  public email = '';
+  public password = "";
+  public id = "";
 
   public pname = '';
   public price = 0;
   public id_ = '';
   public index = 0;
-  constructor(private auth: AuthService, private data: DataService) { }
+  constructor(private auth: AuthService, private data: DataService, private regionService: Region, private cityService: City, private districtService: District) { }
 
   ngOnInit() {
     this.user = this.auth.user;
-    this.data.getAllProducts().subscribe(data => this.Products = data)
+    this.data.getAllUsers().subscribe(data => this.Users = data);
+    this.data.getAllProducts().subscribe(data => this.Products = data);
+    this.regionService.getallRegion().subscribe(data => this.allRegions = data);
+    this.cityService.getallcity().subscribe(data => this.allCity = data);
+    this.districtService.getallDistrict().subscribe(data => this.allDistricts = data);
   }
   logout() {
     this.auth.logout();
@@ -37,7 +58,6 @@ export class UserComponent implements OnInit {
     const target = event.target;
     const pname = target.querySelector('#pname').value;
     const price = target.querySelector('#price').value;
-
     this.data.addProduct(pname, price).subscribe(data => this.Products.push(data))
   }
 
@@ -53,5 +73,54 @@ export class UserComponent implements OnInit {
     this.data.updateProduct(this.pname, this.price, this.id_).subscribe(data => this.Products.splice(this.index, 1, data))
   }
 
+
+  AddUser(event) {
+    event.preventDefault();
+    const target = event.target;
+    const user_id = target.querySelector('#user_id').value;
+    const first_name = target.querySelector('#first_name').value;
+    const last_name = target.querySelector('#last_name').value;
+    const email = target.querySelector('#email').value;
+    const mobile = target.querySelector('#mobile_number').value;
+    const home_phone = target.querySelector('#home_phone').value;
+    const buisness_phone = target.querySelector('#buisness_phone').value;
+    const joining_date = target.querySelector('#joining_Date').value;
+    const manager_name = target.querySelector('#manager_name').value;
+    const password = target.querySelector('#password').value;
+    const line = target.querySelector('#line').value;
+    const region_name = target.querySelector('#region_name').value;
+    const city_name = target.querySelector('#city_name').value;
+    const district_name = target.querySelector('#district_name').value;
+    const address = target.querySelector('#address').value;
+    const pin = target.querySelector('#pin_code').value;
+    const title = target.querySelector('#title').value;
+    const user_role = target.querySelector('#user_role').value;
+    const is_active = target.querySelector('#is_active').value
+    console.log(user_id, first_name, last_name, mobile, home_phone, buisness_phone, joining_date, manager_name, line,
+      region_name, city_name, email, password, district_name, address, pin, title, user_role, is_active)
+    this.data.addUser(user_id, first_name, last_name, mobile, home_phone, buisness_phone, joining_date, manager_name, line,
+      region_name, city_name, email, password, district_name, address, pin, title, user_role, is_active)
+      .subscribe(data => this.Users.push(data))
+  }
+
+  deleteUser(index) {
+    this.data.deleteUser(this.Users[index]._id).subscribe(() => {
+      // this.Users = this.Users.filter(user => user._id = !this.Users[index]._id)
+      this.Users.splice(index, 1);
+    })
+  }
+
+  editUser(i) {
+    this.name = this.Users[i].name;
+    this.email = this.Users[i].email;
+    this.password = this.Users[i].password;
+    this.id = this.Users[i]._id;
+    this.index = i;
+  }
+
+  updateUser(event) {
+    event.preventDefault();
+    this.data.updateUser(this.name, this.email, this.password, this.id).subscribe(data => this.Users.splice(this.index, 1, data))
+  }
 
 }

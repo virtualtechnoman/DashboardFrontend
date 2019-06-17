@@ -5,11 +5,16 @@ import { Router } from '@angular/router'
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedInStatus = false;
+  public loggedInStatus = false;
   public user = '';
 
   constructor(private http: HttpClient, private router: Router) {
-   }
+    if (localStorage.getItem('access_token') != null) {
+      this.loggedInStatus = true;
+    } else {
+      this.loggedInStatus = false;
+    }
+  }
 
   get isloggedIn() {
     console.log(this.loggedInStatus)
@@ -39,6 +44,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('access_token');
     this.router.navigate(['']);
+    this.loggedInStatus = false;
   }
 
   loginUsers(email: String, password: String) {

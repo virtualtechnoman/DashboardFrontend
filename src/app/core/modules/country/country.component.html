@@ -18,7 +18,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="card">
         <h5 class="card-header">
-          <button class="float-right btn btn-success"> +Add New</button>
+          <button class="float-right btn btn-success" data-toggle="modal" data-target="#exampleModal"> +Add New</button>
         </h5>
         <div class="card-body">
           <div class="table-responsive">
@@ -33,22 +33,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
+                <tr *ngFor="let countries of allCountries; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{countries.country_name}}</td>
+                  <td>{{countries.company_name}}</td>
+                  <td *ngIf="countries.is_active">Active</td>
+                  <td *ngIf="!countries.is_active">Not Active</td>
+                  <td><button class="btn btn-sm btn-primary" >E</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteCountry(i)">X</button>
+                  </td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>S.No</th>
-                  <th>Country Name</th>
-                  <th>Company Name</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>
@@ -64,18 +59,40 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Country</h5>
         <a href="#" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
       <div class="modal-body">
-        <p>Woohoo, You are readng this text in a modal! Use Bootstrap’s JavaScript modal plugin to add dialogs
-          to your site for lightboxes, user notifications, or completely custom content.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+        <form (submit)="addCountry($event)">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-3 col-form-label">Country name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Country Name Here" id="countryname" name="countryname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-3 col-form-label">Company name</label>
+              <div class="col-sm-9">
+                <select [(ngModel)]="selectedCompany" name="company_name" class="form-control" >
+                  <option *ngFor="let company of allCompanies" [value]="company.company_name" selected >
+                    {{company.company_name}}</option>
+                </select> </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPrice3" class="col-sm-9 col-form-label">isActive</label>
+              <div class="col-sm-9">
+                <input type="checkbox" class="form-control" id="isActive" placeholder="isActive" name="isActive">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-success" >Save</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

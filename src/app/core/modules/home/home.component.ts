@@ -33,13 +33,13 @@ export class HomeComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
+
   AddUser(event) {
     event.preventDefault();
     const target = event.target;
     const name = target.querySelector('#name').value;
     const email = target.querySelector('#email').value;
     const password = target.querySelector('#password').value;
-
     this.data.addUser(name, email, password).subscribe(data => this.Users.push(data))
   }
 
@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   deleteUser(index) {
-
     this.data.deleteUser(this.Users[index]._id).subscribe(() => {
       // this.Users = this.Users.filter(user => user._id = !this.Users[index]._id)
       this.Users.splice(index, 1);

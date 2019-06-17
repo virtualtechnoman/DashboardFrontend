@@ -21,8 +21,10 @@ export class DataService {
     return this.http.get<Products[]>(this.allProducts)
   }
 
-  addUser(name, email, password) {
-    return this.http.post('http://localhost:5000/api/users/addUser', { name, email, password })
+  addUser(user_id,first_name, last_name, mobile, home_phone, buisness_phone,joining_date, manager_name,line,
+    region_name, city_name , email, password, district_name, address, pin, title, user_role, is_active) {
+    return this.http.post('http://localhost:5000/api/users/addUser', { user_id,first_name, last_name, mobile, home_phone, buisness_phone,joining_date, manager_name,line,
+    region_name, city_name , email, password, district_name, address, pin, title, user_role, is_active })
   }
 
   addProduct(pname, price) {
