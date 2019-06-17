@@ -32,7 +32,7 @@ export class AuthService {
       console.log(data)
       if (data["success"]) {
         localStorage.setItem('access_token', data["token"]);
-        this.router.navigate(['home']);
+        this.router.navigate(['/users']);
         this.loggedInStatus = true;
       }
       else {

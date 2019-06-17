@@ -20,8 +20,7 @@ export class UserComponent implements OnInit {
   selectedRegion;
   selectedCity;
   selectedUserRole;
-  allUserRoles: any[] = ["Admin", "Country Head", "Line Manager", "Region Head", "District Head", "City Head", "BU", "Distirbutor"]
-
+  allUserRoles: any = [];
   public Users = [];
   public name = '';
   public email = '';
@@ -41,6 +40,7 @@ export class UserComponent implements OnInit {
     this.regionService.getallRegion().subscribe(data => this.allRegions = data);
     this.cityService.getallcity().subscribe(data => this.allCity = data);
     this.districtService.getallDistrict().subscribe(data => this.allDistricts = data);
+    this.data.getAllUserRoles().subscribe(res=>this.allUserRoles = res)
   }
   logout() {
     this.auth.logout();
@@ -121,6 +121,24 @@ export class UserComponent implements OnInit {
   updateUser(event) {
     event.preventDefault();
     this.data.updateUser(this.name, this.email, this.password, this.id).subscribe(data => this.Users.splice(this.index, 1, data))
+  }
+
+  AddUserRole(event) {
+    event.preventDefault();
+    const target = event.target;
+    const user_role = target.querySelector('#user_role').value;
+    const can_access_bu = target.querySelector('#user_role').value;
+    const can_access_company = target.querySelector('#user_role').value;
+    const can_access_country = target.querySelector('#user_role').value;
+    const can_access_customer =target.querySelector('#user_role').value;
+    const can_access_district =target.querySelector('#user_role').value;
+    const can_access_region = target.querySelector('#user_role').value;
+    const can_access_therapy = target.querySelector('#user_role').value;
+    const can_access_users = target.querySelector('#user_role').value;
+    const can_access_city = target.querySelector('#user_role').value;
+    console.log(user_role,can_access_bu, can_access_company, can_access_country, can_access_customer, can_access_district, can_access_region, can_access_therapy, can_access_users, can_access_city)
+    this.data.addUserRole(user_role,can_access_bu, can_access_company, can_access_country, can_access_customer, can_access_district, can_access_region, can_access_therapy, can_access_users, can_access_city)
+      .subscribe(data => this.Users.push(data))
   }
 
 }

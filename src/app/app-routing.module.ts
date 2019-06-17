@@ -15,6 +15,7 @@ import { RegionComponent } from './core/modules/region/region.component';
 import { District } from './core/shared/services/district.service.service';
 import { BuComponent } from './core/modules/bu/bu.component';
 import { DistrictComponent } from './core/modules/district/district.component';
+import { UserRoleComponent } from './core/modules/user-role/user-role.component';
 
 const routes: Routes = [
   { path: '',  component: LoginComponent, },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent},
   { path: 'region', component: RegionComponent},
   { path: 'therapy', component: TherapyComponent},
-  { path: 'users', component: UserComponent}
+  { path: 'users', component: UserComponent},
+  { path:'userrole', component: UserRoleComponent}
 ];
 
 @NgModule({

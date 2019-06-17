@@ -1,0 +1,190 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="page-header">
+        <h2 class="pageheader-title">Users</h2>
+        <div class="page-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Users</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <h5 class="card-header">
+          <button class="float-right btn btn-success" data-toggle="modal" data-target="#userRoleModal">Add New User
+            Role</button>
+        </h5>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered first">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>User Role </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of allUserRoles; let i= index">
+                  <td>{{i+1}}</td>
+                  <td>{{user.user_role}}</td>
+                  <td><button class="btn btn-sm btn-primary">E</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteUser(i)">X</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="userRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add User Role</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form (submit)="AddUserRole($event)">
+          <div class="form-group row">
+            <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">User Role</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" placeholder="Enter User Role here" id="user_role"
+                name="user_role">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Company</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline2" value="true" checked="" [(ngModel)]="can_access_company"
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline2" value="false" [(ngModel)]="can_access_company"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Country</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline3" value="true" checked="" [(ngModel)]="can_access_country"
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline3" value="false" [(ngModel)]="can_access_country"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">District</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline4" value="true" checked="" [(ngModel)]="can_access_district"
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline4" value="false" [(ngModel)]="can_access_district"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Region</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline5" value="true" [(ngModel)]="can_access_region" checked=""
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline5" value="false" [(ngModel)]="can_access_region"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Therapy</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline6" value="true" [(ngModel)]="can_access_therapy" checked=""
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline6" value="false" [(ngModel)]="can_access_therapy"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Users</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline7" [(ngModel)]="can_access_users" value="true" checked=""
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline7" [(ngModel)]="can_access_users" value="false"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">BU</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline1" value="true" checked="" [(ngModel)]="can_access_bu"
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline1" value="false" [(ngModel)]="can_access_bu"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">User Role</label>
+                <div class="col-sm-8">
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline8" [(ngModel)]="can_access_customer" value="true" checked=""
+                      class="custom-control-input"><span class="custom-control-label">Allow</span>
+                  </label>
+                  <label class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" name="radio-inline8" [(ngModel)]="can_access_customer" value="false"
+                      class="custom-control-input"><span class="custom-control-label">Ristrict</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <input type="submit" class="btn btn-success">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

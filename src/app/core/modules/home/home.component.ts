@@ -34,14 +34,6 @@ export class HomeComponent implements OnInit {
     this.auth.logout();
   }
 
-  AddUser(event) {
-    event.preventDefault();
-    const target = event.target;
-    const name = target.querySelector('#name').value;
-    const email = target.querySelector('#email').value;
-    const password = target.querySelector('#password').value;
-    this.data.addUser(name, email, password).subscribe(data => this.Users.push(data))
-  }
 
   AddProduct(event) {
     event.preventDefault();
