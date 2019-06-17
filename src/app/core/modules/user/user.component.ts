@@ -95,7 +95,7 @@ export class UserComponent implements OnInit {
     const pin = target.querySelector('#pin_code').value;
     const title = target.querySelector('#title').value;
     const user_role = target.querySelector('#user_role').value;
-    const is_active = target.querySelector('#is_active').value
+    const is_active = true;
     console.log(user_id, first_name, last_name, mobile, home_phone, buisness_phone, joining_date, manager_name, line,
       region_name, city_name, email, password, district_name, address, pin, title, user_role, is_active)
     this.data.addUser(user_id, first_name, last_name, mobile, home_phone, buisness_phone, joining_date, manager_name, line,

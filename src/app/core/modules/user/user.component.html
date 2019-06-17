@@ -149,11 +149,9 @@
             <div class="col">
               <div class="row">
                 <label for="inputname3" class="col-sm-5 col-form-label">Manager Name</label>
-                <div class="col-sm-8">
-                  <select [(ngModel)]="selectedBU" name="selectedBU" id="manager_name" class="form-control">
-                    <option *ngFor="let bu of allBu" [value]="bu.bu_name" selected>
-                      {{bu.bu_name}}</option>
-                  </select> </div>
+                <div class="col-sm-7">
+                  <input type="text" id="manager_name" class="form-control">
+                </div>
               </div>
             </div>
             <div class="col">
@@ -170,7 +168,7 @@
           <div class="form-row align-items-center">
             <div class="col">
               <div class="row">
-                <label for="inputname3" class="col-sm-5 col-form-label">District Name</label>
+                <label for="inputname3" class="col-sm-4 col-form-label">District Name</label>
                 <div class="col-sm-8">
                   <select [(ngModel)]="selectedDistrict" name="selectedDistrict" id="district_name"
                     class="form-control">
@@ -188,10 +186,6 @@
                       {{bu.city_name}}</option>
                   </select> </div>
               </div>
-            </div>
-            <div class="col">
-              <label for="">Status</label>
-              <input type="checkbox" name="Active" id="is_active" class="form-control">
             </div>
           </div>
           <div class="modal-footer">

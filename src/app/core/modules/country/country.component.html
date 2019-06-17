@@ -77,7 +77,7 @@
               <label for="inputname3" class="col-sm-3 col-form-label">Company name</label>
               <div class="col-sm-9">
                 <select [(ngModel)]="selectedCompany" name="company_name" class="form-control" >
-                  <option *ngFor="let company of allCompanies" [value]="company.company_name" selected >
+                  <option *ngFor="let company of allCompanies"  >
                     {{company.company_name}}</option>
                 </select> </div>
             </div>
