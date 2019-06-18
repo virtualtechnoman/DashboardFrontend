@@ -21,4 +21,8 @@ export class District {
   deleteDistrict(id) {
     return this.http.delete(this.base + `delete/${id}`);
   }
+
+  updateDistrict(city_name, company_name, country_name, region_name, district_name, is_active, id) {
+    return this.http.put(this.base + `update/${id}`, { city_name, company_name, country_name, region_name, district_name, is_active })
+  }
 }
