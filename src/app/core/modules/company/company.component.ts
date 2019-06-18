@@ -21,9 +21,13 @@ export class CompanyComponent implements OnInit {
   addCompany(event) {
     let target = event.target;
     const companyname = target.querySelector('#companyname').value;
-    const isactive = true;
+    const isactive = target.querySelector('#isactive').checked;
     this.company.addcompany(companyname, isactive)
-      .subscribe(data => this.companies.push(data));
+      .subscribe(data => {
+        (<HTMLInputElement>document.querySelector('#companyname')).value = "";
+        (<HTMLInputElement>document.querySelector('#isactive')).checked = false;
+        this.companies.push(data)
+      });
   }
 
   deleteCompany(index) {
@@ -36,9 +40,8 @@ export class CompanyComponent implements OnInit {
 
   editcompany(i) {
     this.companyname = this.companies[i].company_name;
+    this.isactive = this.companies[i].is_active;
     this.index = i;
-    console.log(this.companyname)
-
   }
 
   reset() {

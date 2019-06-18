@@ -39,10 +39,17 @@ export class CityComponent implements OnInit {
     const country_name = target.querySelector('#selectedCountry').value;
     const region_name = target.querySelector('#selectedRegion').value;
     const city_name = target.querySelector('#city_name').value;
-    const isactive = true;
+    const isactive = target.querySelector('#isActive').checked;
 
     this.cityService.addcity(company_name, country_name, region_name, city_name, isactive)
-      .subscribe(data => this.allCities.push(data))
+      .subscribe(data => {
+        (<HTMLInputElement>document.querySelector('#selectedCompany')).value = "";
+        (<HTMLInputElement>document.querySelector('#selectedCountry')).value = "";
+        (<HTMLInputElement>document.querySelector('#selectedRegion')).value = "";
+        (<HTMLInputElement>document.querySelector('#city_name')).value = "";
+        (<HTMLInputElement>document.querySelector('#isActive')).checked = false;
+        this.allCities.push(data)
+      })
   }
 
   deletecity(index) {
@@ -56,8 +63,8 @@ export class CityComponent implements OnInit {
     this.country = this.allCities[i].country_name
     this.region = this.allCities[i].region_name
     this.company = this.allCities[i].company_name;
+    this.isactive = this.allCities[i].is_active;
     this.index = i;
-    console.log(this.company)
 
   }
 
@@ -69,8 +76,7 @@ export class CityComponent implements OnInit {
     this.isactive = false;
   }
 
-  updatecity() {
-
+  updatecity(data) {
     this.cityService.updatecity(this.company, this.country, this.region, this.city, this.isactive, this.allCities[this.index]._id)
       .subscribe(data => {
         this.reset();
