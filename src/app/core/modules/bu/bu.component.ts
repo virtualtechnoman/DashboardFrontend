@@ -16,7 +16,7 @@ export class BuComponent implements OnInit {
 
   ngOnInit() {
 
-    this.bu.getallbus().subscribe(data => { console.log(data); this.items = data })
+    this.bu.getallbus().subscribe(data => this.items = data)
 
   }
   addbu(event) {

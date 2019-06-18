@@ -9,11 +9,11 @@ import { Region } from '../../shared/services/region.service.service';
   styleUrls: ['./city.component.css']
 })
 export class CityComponent implements OnInit {
-  private selectedcity = '';
-  private selectedcountry = '';
-  private selectedregion = '';
-  private selectedcompany = '';
-  private isactive = false;
+  public city: String;
+  public country: String;
+  public region: String
+  public company: String;
+  private isactive: boolean = false;
   public index = 0;
   public allCities: any = [];
   public allCountries: any = [];
@@ -21,7 +21,7 @@ export class CityComponent implements OnInit {
   public allRegions: any = [];
 
 
-  constructor(private city: City, private countryService: CountryService, private companyService: CompanyService,
+  constructor(private cityService: City, private countryService: CountryService, private companyService: CompanyService,
 
     private regionService: Region) {
     this.countryService.getallcountry().subscribe(res => this.allCountries = res);
@@ -30,7 +30,7 @@ export class CityComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.city.getallcity().subscribe(data => { this.allCities = data })
+    this.cityService.getallcity().subscribe(data => { this.allCities = data })
   }
 
   addcity(event) {
@@ -41,42 +41,41 @@ export class CityComponent implements OnInit {
     const city_name = target.querySelector('#city_name').value;
     const isactive = true;
 
-    this.city.addcity(company_name, country_name, region_name, city_name, isactive)
+    this.cityService.addcity(company_name, country_name, region_name, city_name, isactive)
       .subscribe(data => this.allCities.push(data))
   }
 
   deletecity(index) {
-    this.city.deletecity(this.allCities[index]._id).subscribe(() => this.allCities.splice(index, 1))
+    this.cityService.deletecity(this.allCities[index]._id).subscribe(() => this.allCities.splice(index, 1))
   }
 
 
 
   editcity(i) {
-    this.selectedcity = this.allCities[i].city_name
-    this.selectedcountry = this.allCities[i].company_name
-    this.selectedregion = this.allCities[i].region_name
-    this.selectedcompany = this.allCities[i].company_name;
+    this.city = this.allCities[i].city_name
+    this.country = this.allCities[i].country_name
+    this.region = this.allCities[i].region_name
+    this.company = this.allCities[i].company_name;
     this.index = i;
+    console.log(this.company)
 
   }
 
   reset() {
-    this.selectedcity = '';
-    this.selectedcountry = '';
-    this.selectedregion = '';
-    this.selectedcompany = '';
+    this.city = '';
+    this.country = '';
+    this.region = '';
+    this.company = '';
     this.isactive = false;
   }
 
   updatecity() {
-    this.city.updatecity(this.selectedcompany, this.selectedcountry, this.selectedregion, this.selectedcity, this.isactive, this.allCities[this.index]._id)
+
+    this.cityService.updatecity(this.company, this.country, this.region, this.city, this.isactive, this.allCities[this.index]._id)
       .subscribe(data => {
         this.reset();
         alert("recors updated");
         this.allCities.splice(this.index, 1, data);
       })
-
   }
-
-
 }

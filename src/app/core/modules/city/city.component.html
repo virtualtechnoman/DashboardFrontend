@@ -73,7 +73,7 @@
           <div class="form-group row">
             <label for="inputname3" class="col-sm-4 col-form-label font-weight-bold">Company name</label>
             <div class="col-sm-8">
-              <select [(ngModel)]="selectedCompany" name="company_name" class="form-control">
+              <select [(ngModel)]="company" name="company" class="form-control">
                 <option *ngFor="let company of allCompanies" [value]="company.company_name" selected>
                   {{company.company_name}}</option>
               </select> </div>
@@ -82,7 +82,7 @@
           <div class="form-group row">
             <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Country name</label>
             <div class="col-sm-8">
-              <select [(ngModel)]="selectedcountry" name="selectedcountry" class="form-control">
+              <select [(ngModel)]="country" name="country" class="form-control">
                 <option *ngFor="let country of allCountries" [value]="country.country_name" selected>
                   {{country.country_name}}</option>
               </select> </div>
@@ -91,7 +91,7 @@
           <div class="form-group row">
             <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">Region name</label>
             <div class="col-sm-8">
-              <select [(ngModel)]="selectedregion" name="selectedregion" class="form-control">
+              <select [(ngModel)]="region" name="region" class="form-control">
                 <option *ngFor="let region of allRegions" [value]="region.region_name" selected>
                   {{region.region_name}}</option>
               </select> </div>
@@ -100,8 +100,7 @@
           <div class="form-group row">
             <label for="inputPrice3" class="col-sm-4 col-form-label font-weight-bold">City name</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" [(ngModel)]="selectedcity" placeholder="Enter City Name Here"
-                name="selectedcity">
+              <input type="text" class="form-control" [(ngModel)]="city" placeholder="Enter City Name Here" name="city">
             </div>
           </div>
           <div class="form-group row">
