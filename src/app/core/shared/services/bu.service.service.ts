@@ -14,7 +14,7 @@ export class Bu {
     return this.http.get(this.base + 'all')
   }
 
-  addbu(bu_name, bu_id) {
+  addbu(bu_id, bu_name) {
     return this.http.post(this.base + 'addBU', { bu_id, bu_name })
   }
 

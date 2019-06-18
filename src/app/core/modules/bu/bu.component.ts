@@ -23,7 +23,11 @@ export class BuComponent implements OnInit {
     let target = event.target;
     const buid = target.querySelector('#buid').value;
     const buname = target.querySelector('#buname').value;
-    this.bu.addbu(this.buid, this.buname).subscribe(data => this.items.push(data));
+    this.bu.addbu(buid, buname).subscribe(data => {
+      (<HTMLInputElement>document.querySelector('#buid')).value = "";
+      (<HTMLInputElement>document.querySelector('#buname')).value = "";
+      this.items.push(data)
+    });
   }
 
   deletebu(index) {
