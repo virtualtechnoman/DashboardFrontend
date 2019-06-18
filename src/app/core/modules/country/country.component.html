@@ -39,7 +39,8 @@
                   <td>{{countries.company_name}}</td>
                   <td *ngIf="countries.is_active">Active</td>
                   <td *ngIf="!countries.is_active">Not Active</td>
-                  <td><button class="btn btn-sm btn-primary" >E</button>
+                  <td><button class="btn btn-sm btn-primary" (click)="editCountry(i)" data-toggle="modal"
+                      data-target="#editModal">E</button>
                     <button class="btn btn-sm btn-danger" (click)="deleteCountry(i)">X</button>
                   </td>
                 </tr>
@@ -53,6 +54,50 @@
 </div>
 
 
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Country</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form (submit)="updatecountry()">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-3 col-form-label">Country name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Country Name Here" [(ngModel)]="countryname"
+                  name="countryname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputname3" class="col-sm-3 col-form-label">Company name</label>
+              <div class="col-sm-9">
+                <select [(ngModel)]="companyname" name="companyname" class="form-control">
+                  <option *ngFor="let company of allCompanies" [value]="company.company_name">
+                    {{company.company_name}}</option>
+                </select> </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPrice3" class="col-sm-9 col-form-label">isActive</label>
+              <div class="col-sm-3">
+                <input type="checkbox" class="form-control" [(ngModel)]="isactive" name="isactive">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -70,27 +115,28 @@
             <div class="form-group row">
               <label for="inputname3" class="col-sm-3 col-form-label">Country name</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Country Name Here" id="countryname" name="countryname">
+                <input type="text" class="form-control" placeholder="Country Name Here" id="countryname"
+                  name="countryname">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputname3" class="col-sm-3 col-form-label">Company name</label>
               <div class="col-sm-9">
-                <select [(ngModel)]="selectedCompany" name="company_name" class="form-control" >
-                  <option *ngFor="let company of allCompanies"  >
+                <select id="companyname" name="companyname" class="form-control">
+                  <option *ngFor="let company of allCompanies">
                     {{company.company_name}}</option>
                 </select> </div>
             </div>
             <div class="form-group row">
               <label for="inputPrice3" class="col-sm-9 col-form-label">isActive</label>
-              <div class="col-sm-9">
-                <input type="checkbox" class="form-control" id="isActive" placeholder="isActive" name="isActive">
+              <div class="col-sm-3">
+                <input type="checkbox" class="form-control" id="isActive">
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
-            <button type="submit" class="btn btn-success" >Save</button>
+            <button type="submit" class="btn btn-success">Save</button>
           </div>
         </form>
       </div>

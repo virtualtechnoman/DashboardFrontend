@@ -15,11 +15,15 @@ export class CountryService {
     return this.http.get(this.base + 'all')
   }
 
-  addcountry(company_name, country_name, is_active ) {
+  addcountry(company_name, country_name, is_active) {
     return this.http.post(this.base + 'addCountry', { company_name, country_name, is_active })
   }
 
   deletecountry(id) {
     return this.http.delete(this.base + `delete/${id}`);
+  }
+
+  updatecountry(country_name, company_name, is_active, id) {
+    return this.http.put(this.base + `update/${id}`, { country_name, company_name, is_active })
   }
 }
